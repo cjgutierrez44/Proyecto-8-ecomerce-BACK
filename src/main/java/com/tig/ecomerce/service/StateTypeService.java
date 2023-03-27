@@ -8,3 +8,4 @@ public interface StateTypeService {
 	List<StateType> getStatetypes();
 	StateType saveStateType(StateType stateType);
 }
+//hola
