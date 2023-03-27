@@ -1,9 +1,14 @@
 package com.tig.ecomerce.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,8 +24,15 @@ public class Product {
 	private Double price;
 	private String picture;
 	private int quantity;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
 	private Category category;
-	private User user;
+	//private User user;
+	@ManyToOne
+	@JoinColumn(name = "state_id")
 	private State state;
+	
+	@OneToMany(mappedBy = "product")
+	private Set<Comment> comments;
 	
 }

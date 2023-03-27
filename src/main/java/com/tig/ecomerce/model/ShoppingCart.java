@@ -15,8 +15,8 @@ public class ShoppingCart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private Date timeStamp;
-	private User user;
-	private State state;
+	//private User user;
+	//private State state;
 	
 	//detail
 	

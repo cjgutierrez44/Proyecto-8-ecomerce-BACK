@@ -19,9 +19,9 @@ public class Invoice {
 	private long customerDocument;
 	private double subTotal;
 	private Double total;
-	private User user;
-	private PaymentMethod peymentMethod;
-	private State state;
+	//private User user;
+	//private PaymentMethod peymentMethod;
+	//private State state;
 
 	//detail	
 	
