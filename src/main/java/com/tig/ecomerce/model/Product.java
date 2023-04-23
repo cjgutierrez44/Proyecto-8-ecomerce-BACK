@@ -39,6 +39,12 @@ public class Product {
 	@JsonIgnore 
 	@OrderBy("id DESC")
 	private Set<Comment> comments;
+	
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -105,8 +111,16 @@ public class Product {
 	public void setComments(Set<Comment> comments) {
 		this.comments = comments;
 	}
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Product(int id, long eanCode, String name, String description, String brand, Double price, String picture,
-			int quantity, Category category, State state, Set<Comment> comments) {
+			int quantity, Category category, State state, Set<Comment> comments, User user) {
 		super();
 		this.id = id;
 		this.eanCode = eanCode;
@@ -119,6 +133,37 @@ public class Product {
 		this.category = category;
 		this.state = state;
 		this.comments = comments;
+		this.user = user;
+	}
+	public Product(long eanCode, String name, String description, String brand, Double price, String picture,
+			int quantity, Category category, State state, Set<Comment> comments, User user) {
+		super();
+
+		this.eanCode = eanCode;
+		this.name = name;
+		this.description = description;
+		this.brand = brand;
+		this.price = price;
+		this.picture = picture;
+		this.quantity = quantity;
+		this.category = category;
+		this.state = state;
+		this.comments = comments;
+		this.user = user;
+	}
+	public Product(int id, long eanCode, String name, String description, String brand, Double price, String picture, int quantity, Category category, State state, User user) {
+		super();
+		this.id = id;
+		this.eanCode = eanCode;
+		this.name = name;
+		this.description = description;
+		this.brand = brand;
+		this.price = price;
+		this.picture = picture;
+		this.quantity = quantity;
+		this.category = category;
+		this.state = state;
+		this.user = user;
 	}
 	public Product() {
 		super();
@@ -127,8 +172,9 @@ public class Product {
 	public String toString() {
 		return "Product [id=" + id + ", eanCode=" + eanCode + ", name=" + name + ", description=" + description
 				+ ", brand=" + brand + ", price=" + price + ", picture=" + picture + ", quantity=" + quantity
-				+ ", category=" + category + ", state=" + state + ", comments=" + comments + "]";
+				+ ", category=" + category + ", state=" + state + ", comments=" + comments + ", user=" + user + "]";
 	}
+
 
 	
 }

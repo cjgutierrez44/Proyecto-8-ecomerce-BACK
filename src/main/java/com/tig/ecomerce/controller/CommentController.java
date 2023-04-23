@@ -39,7 +39,7 @@ public class CommentController {
 	}
 	
 	@GetMapping("/byProductId/{id}")
-	public Set<Comment> getCitiesByDepartmentId(@PathVariable("id") int id) {
+	public Set<Comment> getCicomentsByProdcutId(@PathVariable("id") int id) {
 		return productService.getProductById(id).getComments();
 	}
 	

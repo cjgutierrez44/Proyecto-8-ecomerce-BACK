@@ -55,7 +55,8 @@ public class ProductServiceImplementation implements ProductService{
 	public Product deleteProduct(int id) {
 		Optional<Product> product = repository.findById(id);
 		if(product.isPresent()) {
-			product.get().setState(stateService.getStateById(2));
+			product.get().setState(stateService.getStateById(4));
+			return repository.save(product.get());
 		}
 		throw new RuntimeException("Product doesn´t exist in database");
 	}
@@ -72,7 +73,22 @@ public class ProductServiceImplementation implements ProductService{
 
 	@Override
 	public List<Product> getProductsByPriceBetween(double minPrice, double maxPrice) {
-		return repository.findByPriceBetween(minPrice, maxPrice);
+		return repository.findByPriceBetweenMM(minPrice, maxPrice);
+	}
+
+	@Override
+	public List<Product> getProductsByuserId(int state_id, int user_id) {
+		return repository.findByUser(state_id, user_id);
+	}
+
+	@Override
+	public Product restoreProduct(int id) {
+		Optional<Product> product = repository.findById(id);
+		if(product.isPresent()) {
+			product.get().setState(stateService.getStateById(3));
+			return repository.save(product.get());
+		}
+		throw new RuntimeException("Product doesn´t exist in database");
 	}
 
 

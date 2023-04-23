@@ -1,5 +1,8 @@
 package com.tig.ecomerce.model;
 
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -10,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +38,10 @@ public class User {
 	private String addressNumber;
 	private String addressHouse;
 	private String addressAditionalInfo;
+	@OneToMany(fetch = FetchType.LAZY,  mappedBy = "user")
+	@JsonIgnore 
+	@OrderBy("id ASC")
+	private Set<Product> products;
 	@ManyToOne
 	@JoinColumn(name = "state_id")
 	private State state;
@@ -109,6 +118,13 @@ public class User {
 	public void setAddressAditionalInfo(String addressAditionalInfo) {
 		this.addressAditionalInfo = addressAditionalInfo;
 	}
+	
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 	public State getState() {
 		return state;
 	}
@@ -116,11 +132,30 @@ public class User {
 		this.state = state;
 	}
 	
+
 	public User(int id, String name, String lastName, int phone, String email, String password, City city,
+			StreetType streetType, String street, String addressNumber, String addressHouse,
+			String addressAditionalInfo, Set<Product> products, State state) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+		this.city = city;
+		this.streetType = streetType;
+		this.street = street;
+		this.addressNumber = addressNumber;
+		this.addressHouse = addressHouse;
+		this.addressAditionalInfo = addressAditionalInfo;
+		this.products = products;
+		this.state = state;
+	}
+	public User(String name, String lastName, int phone, String email, String password, City city,
 			StreetType streetType, String street, String addressNumber, String addressHouse,
 			String addressAditionalInfo, State state) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.phone = phone;
@@ -134,23 +169,8 @@ public class User {
 		this.addressAditionalInfo = addressAditionalInfo;
 		this.state = state;
 	}
-	public User(String name, String lastName, int phone, String email, String password, City city,
-			StreetType streetType, String street, String addressNumber, String addressHouse,
-			String addressAditionalInfo, State state) {
-		super();
+	public User(int id) {
 		this.id = id;
-		this.name = name;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
-		this.city = city;
-		this.streetType = streetType;
-		this.street = street;
-		this.addressNumber = addressNumber;
-		this.addressHouse = addressHouse;
-		this.addressAditionalInfo = addressAditionalInfo;
-		this.state = state;
 	}
 	public User() {
 		super();
