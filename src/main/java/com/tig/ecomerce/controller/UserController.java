@@ -32,7 +32,7 @@ public class UserController {
 	public User register(@RequestBody User user) {
 		user.setCity(cityService.getCityById(user.getCity().getId()));
 		user.setStreetType(streetTypeService.getStreetTypeById(user.getStreetType().getId()));
-		user.setState(stateService.getStateById(3));
+		user.setState(stateService.getStateById(1));
 		System.out.println(user.toString());
 		return userService.saveUser(user);	
 	}

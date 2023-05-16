@@ -14,16 +14,16 @@ import com.tig.ecomerce.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>{
-    @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE %:keyword% and p.state.id = 3")
+    @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE %:keyword% and p.state.id = 1 AND p.quantity > 0")
     List<Product> findByKeyword(@Param("keyword") String keyword);
     
-    @Query("SELECT p FROM Product p WHERE p.price <= ?1 and p.state.id = 3")
+    @Query("SELECT p FROM Product p WHERE p.price <= ?1 and p.state.id = 1 AND p.quantity > 0")
     List<Product> findByPriceLessThanOrEqual(Double price);
     
-    @Query("SELECT p FROM Product p WHERE p.price >= ?1 and p.state.id = 3")
+    @Query("SELECT p FROM Product p WHERE p.price >= ?1 and p.state.id = 1 AND p.quantity > 0")
     List<Product> findByPriceGreaterThanOrEqual(Double price);
     
-    @Query("SELECT p FROM Product p WHERE p.price >= ?1 and p.price <= ?2 and p.state.id = 3")
+    @Query("SELECT p FROM Product p WHERE p.price >= ?1 and p.price <= ?2 and p.state.id = 1 AND p.quantity > 0")
     List<Product> findByPriceBetweenMM(Double minPrice, Double maxPrice);
     
     @Query("SELECT p FROM Product p WHERE p.state.id = ?1 AND p.user.id = ?2")
