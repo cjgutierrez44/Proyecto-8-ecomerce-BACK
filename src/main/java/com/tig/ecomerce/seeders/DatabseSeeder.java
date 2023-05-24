@@ -10,12 +10,14 @@ import org.springframework.stereotype.Component;
 import com.tig.ecomerce.model.Category;
 import com.tig.ecomerce.model.City;
 import com.tig.ecomerce.model.Department;
+import com.tig.ecomerce.model.PaymentMethod;
 import com.tig.ecomerce.model.State;
 import com.tig.ecomerce.model.StateType;
 import com.tig.ecomerce.model.StreetType;
 import com.tig.ecomerce.service.CategoryService;
 import com.tig.ecomerce.service.CityService;
 import com.tig.ecomerce.service.DepartmentService;
+import com.tig.ecomerce.service.PaymentMethodService;
 import com.tig.ecomerce.service.StateService;
 import com.tig.ecomerce.service.StateTypeService;
 import com.tig.ecomerce.service.StreetTypeService;
@@ -35,7 +37,8 @@ public class DatabseSeeder implements CommandLineRunner {
 	private StateService stateService;
 	@Autowired
 	private CategoryService categoryService;
-	
+	@Autowired
+	private PaymentMethodService paymentmethodService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -45,6 +48,18 @@ public class DatabseSeeder implements CommandLineRunner {
 		setUpStateTypes();
 		setUpStates();
 		setUpCategories();
+		setUpPaymentMethods();
+	}
+	
+	private void setUpPaymentMethods() {
+		if(paymentmethodService.getPaymentMethods().isEmpty()) {
+			List<PaymentMethod> paymentMehods = new ArrayList<>();
+			paymentMehods.add(new PaymentMethod(1, "Trjeta de crédito"));
+			paymentMehods.add(new PaymentMethod(2, "Tarjeta de débito"));
+			paymentMehods.add(new PaymentMethod(3, "Transferencia desde tu banco con PSE"));
+			paymentMehods.add(new PaymentMethod(4, "Pago en efectivo con Efecty"));
+			paymentmethodService.saveAllPaymentMethods(paymentMehods);
+ 		}
 	}
 	
 	private void setUpCategories() {
@@ -72,8 +87,13 @@ public class DatabseSeeder implements CommandLineRunner {
 		if(stateService.getStates().isEmpty()) {
 			List<State> states = new ArrayList<>();
 			
-			states.add(new State(1,"Active", stateTypeService.getStateTypeById(1)));
-			states.add(new State(2,"Inactive", stateTypeService.getStateTypeById(1)));
+			states.add(new State(1,"Activo", stateTypeService.getStateTypeById(1)));
+			states.add(new State(2,"Inactivo", stateTypeService.getStateTypeById(1)));
+			states.add(new State(3,"Abierto", stateTypeService.getStateTypeById(2)));
+			states.add(new State(4,"Cerrado", stateTypeService.getStateTypeById(2)));
+			states.add(new State(5,"Por pagar", stateTypeService.getStateTypeById(3)));
+			states.add(new State(6,"Pagada", stateTypeService.getStateTypeById(3)));
+			states.add(new State(7,"Cancelada", stateTypeService.getStateTypeById(3)));
 			
 			stateService.saveAllStates(states);
 		}
@@ -84,6 +104,8 @@ public class DatabseSeeder implements CommandLineRunner {
 		if(stateTypeService.getStatetypes().isEmpty()) {
 			List<StateType> stateTypes = new ArrayList<>();
 			stateTypes.add(new StateType(1, "state"));
+			stateTypes.add(new StateType(2, "shoppingCartsState"));
+			stateTypes.add(new StateType(3, "invoice"));
 			
 			stateTypeService.saveAllStatetypes(stateTypes);
 		}

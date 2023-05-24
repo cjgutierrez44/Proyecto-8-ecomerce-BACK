@@ -66,7 +66,7 @@ public class Comment {
         
 	    String dateG = dateFormat.format(new Date());
 		this.date = dateG;
-		this.date = dateG;
+
 	}
 	public Comment(int id, Product product, User user, String comment, String date) {
 		super();

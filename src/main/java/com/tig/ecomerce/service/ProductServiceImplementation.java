@@ -55,7 +55,7 @@ public class ProductServiceImplementation implements ProductService{
 	public Product deleteProduct(int id) {
 		Optional<Product> product = repository.findById(id);
 		if(product.isPresent()) {
-			product.get().setState(stateService.getStateById(4));
+			product.get().setState(stateService.getStateById(2));
 			return repository.save(product.get());
 		}
 		throw new RuntimeException("Product doesn´t exist in database");
@@ -85,7 +85,7 @@ public class ProductServiceImplementation implements ProductService{
 	public Product restoreProduct(int id) {
 		Optional<Product> product = repository.findById(id);
 		if(product.isPresent()) {
-			product.get().setState(stateService.getStateById(3));
+			product.get().setState(stateService.getStateById(1));
 			return repository.save(product.get());
 		}
 		throw new RuntimeException("Product doesn´t exist in database");

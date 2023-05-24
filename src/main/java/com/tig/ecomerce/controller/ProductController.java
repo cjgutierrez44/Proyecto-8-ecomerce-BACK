@@ -66,12 +66,12 @@ public class ProductController {
 	
 	@GetMapping("ByUserId/{id}")
 	public List<Product> getProductsByUserId(@PathVariable("id") int id){
-		return productService.getProductsByuserId(3, id);
+		return productService.getProductsByuserId(1, id);
 	}
 	
 	@GetMapping("ByUserIdDeleted/{id}")
 	public List<Product> getDeletedProductsByUserId(@PathVariable("id") int id){
-		return productService.getProductsByuserId(4, id);
+		return productService.getProductsByuserId(2, id);
 	}
 	
 	@GetMapping("/ByCategoryId/{id}")
@@ -81,7 +81,7 @@ public class ProductController {
 	
 	@PostMapping("/save")
 	public Product saveProduct(@RequestBody Product product) {
-		product.setState(stateService.getStateById(3));
+		product.setState(stateService.getStateById(1));
 		product.setCategory(categoryService.getCategoryById(product.getCategory().getId()));
 		product.setUser(userService.getUserbyId(product.getUser().getId()));
 		return productService.saveProduct(product);
@@ -90,7 +90,7 @@ public class ProductController {
 	@PostMapping("/update")
 	public Product updateProduct(@RequestBody Product product) {
 		System.out.println(product);
-		product.setState(stateService.getStateById(3));
+		product.setState(stateService.getStateById(1));
 		product.setCategory(categoryService.getCategoryById(product.getCategory().getId()));
 		product.setUser(userService.getUserbyId(product.getUser().getId()));
 		return productService.updateProduct(product);
